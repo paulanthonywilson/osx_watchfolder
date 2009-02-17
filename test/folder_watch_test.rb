@@ -36,7 +36,7 @@ include FileUtils
   end
   
 
-  def test_notified_if_other_watched_folder_changes
+  def test_notified_if_another_watched_folder_changes
     in_a_second_write_file_and_stop_watcher @some_folders.last + "/somefile"
     watch_folders
     assert @folder_changed    
@@ -45,9 +45,9 @@ include FileUtils
  
   def in_a_second_yield_and_stop_watcher
     Thread.new do
-      sleep 1
       p "yawn"
       yield if block_given?
+      sleep 1
       @testee.stop
     end
   end

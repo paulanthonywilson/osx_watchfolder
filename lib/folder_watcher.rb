@@ -3,12 +3,12 @@ OSX.require_framework '/System/Library/Frameworks/CoreServices.framework/Framewo
 
 class FolderWatcher
   
-  attr_accessor :running, :latency, :runloop_interval
+  attr_accessor :latency, :runloop_interval
 
 
   def stop
     p "stop"
-    @running = false
+    OSX::CFRunLoopStop(@runloop)
   end
   def start
     p "start"
@@ -24,13 +24,12 @@ class FolderWatcher
           OSX::KFSEventStreamEventIdSinceNow, 
           @latency,
           OSX::KFSEventStreamCreateFlagNone)
+    
+    @runloop = OSX::CFRunLoopGetCurrent()
 
-    OSX::FSEventStreamScheduleWithRunLoop(stream, OSX::CFRunLoopGetCurrent(), OSX::KCFRunLoopDefaultMode)   
+    OSX::FSEventStreamScheduleWithRunLoop(stream, @runloop, OSX::KCFRunLoopDefaultMode)   
     OSX::FSEventStreamStart(stream)
-    while(running) do
-      OSX::CFRunLoopRunInMode(OSX::KCFRunLoopDefaultMode, @runloop_interval, false);  
-      p "hi"
-    end
+    OSX::CFRunLoopRun()
   end  
 
 
@@ -39,7 +38,6 @@ class FolderWatcher
     @block = block
     @running = true
     @latency = 1
-    @runloop_interval =  5 
   end
 
 end
