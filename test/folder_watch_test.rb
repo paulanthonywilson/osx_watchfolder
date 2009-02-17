@@ -46,6 +46,8 @@ include FileUtils
   
   def watch_folders
     @testee = FolderWatcher.new(*@watched_dirs) {@folder_changed = true}
+    @testee.latency = 0.1
+    @testee.runloop_interval = 0.5
     @testee.start
   end
     
