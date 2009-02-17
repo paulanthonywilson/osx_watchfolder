@@ -11,6 +11,7 @@ class FolderWatcher
   end
 
   def start
+    raise "May only be started from main thread" unless Thread.current == Thread.main
     callback = lambda do |streamRef, clientCallBackInfo, numEvents,eventPaths, eventFlags,eventIds| 
       @block.call
     end

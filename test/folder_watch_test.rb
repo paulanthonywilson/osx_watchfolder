@@ -5,6 +5,7 @@ require File.dirname(__FILE__) + '/../lib/folder_watcher'
 
 class FolderWatchTest <  Test::Unit::TestCase
 include FileUtils
+
   def setup
     @some_folders = [Dir.tmpdir + "/folder_watch_test1", Dir.tmpdir + "/folder_watch_test2"]
     @some_folders.each {|dir| rm_rf dir}
@@ -39,6 +40,14 @@ include FileUtils
     in_a_second_write_file_and_stop_watcher @some_folders.last + "/somefile"
     watch_folders
     assert @folder_changed    
+  end
+ 
+  def test_must_be_started_in_main_thread
+    @testee = FolderWatcher.new(*@some_folders) {}
+    t = Thread.new do
+      assert_raise(RuntimeError){ @testee.start}
+    end
+    t.join
   end
  
  
