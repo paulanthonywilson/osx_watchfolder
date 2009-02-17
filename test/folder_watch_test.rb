@@ -10,29 +10,44 @@ include FileUtils
     @watched_dirs = [Dir.tmpdir + "/folder_watch_test1", Dir.tmpdir + "/folder_watch_test2"]
     @watched_dirs.each {|dir| rm_rf dir}
     @watched_dirs.each {|dir| mkdir dir}
-    FolderWatcher::watch_folders(@watched_dirs) {@folder_changed = true}
     @folder_changed = false
   end
   
   def teardown
+    @testee.stop
     @watched_dirs.each {|dir| rm_rf dir}
   end
   
-  def test_nothing_happens_if_a_watched_folder_does_not_change
+  def xtest_nothing_happens_if_a_watched_folder_does_not_change
     assert !@folder_changed
   end
   
   def test_notified_if_first_watched_folder_changes
-    File.open(@watched_dirs.first + "/somefile", "w"){|f| f.write "hello"}
-    sleep 1
-    assert @folder_changed
-  end
-
-  def test_notified_if_other_watched_folder_changes
-    File.open(@watched_dirs.last + "/somefile", "w"){|f| f.write "hello"}
-    sleep 1
-    assert @folder_changed
+    in_a_second_write_file_and_stop_watcher @watched_dirs.first + "/somefile"
+    watch_folders
+    assert @folder_changed    
   end
   
+
+  def test_notified_if_other_watched_folder_changes
+    in_a_second_write_file_and_stop_watcher @watched_dirs.last + "/somefile"
+    watch_folders
+    assert @folder_changed    
+  end
+ 
+  def in_a_second_write_file_and_stop_watcher(file)
+    Thread.new do
+      sleep 1
+      p "yawn"
+      File.open(file, "w"){|f| f.write "hello"}
+      @testee.stop
+    end
+  end
+  
+  def watch_folders
+    @testee = FolderWatcher.new(*@watched_dirs) {@folder_changed = true}
+    @testee.start
+  end
+    
   
 end

@@ -1,10 +1,46 @@
-require 'osx/cocoa'
-require File.expand_path(File.dirname(__FILE__) + "/osx_watchfolder.bundle")
+require 'osx/foundation'  
+OSX.require_framework '/System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework'
 
-OSX::ns_import :FolderWatcher
+class FolderWatcher
+  
+  attr_accessor :running, :latency, :runloop_interval
 
 
-module FolderWatcher
-  def self.watch_folders(*folders)
+  def stop
+    p "stop"
+    @running = false
   end
+  def start
+    p "start"
+    callback = lambda do |streamRef, clientCallBackInfo, numEvents,eventPaths, eventFlags,eventIds| 
+      puts "ooh"
+      @block.call
+    end
+    p @folder
+    stream = OSX::FSEventStreamCreate(nil,
+          callback,
+          nil,
+          @folders,
+          OSX::KFSEventStreamEventIdSinceNow, 
+          @latency,
+          OSX::KFSEventStreamCreateFlagNone)
+
+    OSX::FSEventStreamScheduleWithRunLoop(stream, OSX::CFRunLoopGetCurrent(), OSX::KCFRunLoopDefaultMode)   
+    OSX::FSEventStreamStart(stream)
+    while(running) do
+      OSX::CFRunLoopRunInMode(OSX::KCFRunLoopDefaultMode, @runloop_interval, false);  
+      p "hi"
+    end
+  end  
+
+
+  private 
+  def initialize(*folders, &block)
+    @folders = folders
+    @block = block
+    @running = true
+    @latency = 1
+    @runloop_interval =  5 
+  end
+
 end
