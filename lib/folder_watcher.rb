@@ -7,16 +7,13 @@ class FolderWatcher
 
 
   def stop
-    p "stop"
     OSX::CFRunLoopStop(@runloop)
   end
+
   def start
-    p "start"
     callback = lambda do |streamRef, clientCallBackInfo, numEvents,eventPaths, eventFlags,eventIds| 
-      puts "ooh"
       @block.call
     end
-    p @folder
     stream = OSX::FSEventStreamCreate(nil,
           callback,
           nil,

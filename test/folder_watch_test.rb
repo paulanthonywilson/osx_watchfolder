@@ -3,7 +3,6 @@ require 'tmpdir'
 require 'fileutils'
 require File.dirname(__FILE__) + '/../lib/folder_watcher'
 
-
 class FolderWatchTest <  Test::Unit::TestCase
 include FileUtils
   def setup
@@ -45,7 +44,6 @@ include FileUtils
  
   def in_a_second_yield_and_stop_watcher
     Thread.new do
-      p "yawn"
       yield if block_given?
       sleep 1
       @testee.stop
