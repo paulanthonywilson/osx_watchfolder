@@ -34,9 +34,8 @@ class FolderWatcher
   end  
 
 
-  private 
   def initialize(*folders, &block)
-    @folders = folders
+    @folders = Array === folders.first ? folders.first : folders
     @block = block
     @running = true
     @latency = 1
