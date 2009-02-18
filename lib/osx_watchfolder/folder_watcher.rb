@@ -29,7 +29,12 @@ module OsxWatchfolder
 
       OSX::FSEventStreamScheduleWithRunLoop(stream, @runloop, OSX::KCFRunLoopDefaultMode)   
       OSX::FSEventStreamStart(stream)
+      
       OSX::CFRunLoopRun()
+      
+      OSX::FSEventStreamStop(stream)
+      OSX::FSEventStreamInvalidate(stream)
+      OSX::FSEventStreamRelease(stream)
     end  
 
 
