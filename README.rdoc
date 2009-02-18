@@ -19,7 +19,7 @@ Only works on OSX 10.5+ (Leopard), obviously.
 
 To run a the method 'run_tests' when a change is detected in a couple of folders:
 
-  OsxWatchFolder::FolderWatcher.new ("lib", "test") { run_tests}
+  OsxWatchfolder::FolderWatcher.new("lib", "test") { run_tests}.start
 
 == REQUIREMENTS:
 
