@@ -1,10 +1,11 @@
 require 'test/unit'
 require 'tmpdir'
 require 'fileutils'
-require File.expand_path(File.dirname(__FILE__) + '/../lib/folder_watcher')
+require File.expand_path(File.dirname(__FILE__) + '/../lib/osx_watchfolder')
 
 class TestFolderWatch <  Test::Unit::TestCase
 include FileUtils
+include OsxWatchfolder
 
   def setup
     @some_folders = [Dir.tmpdir + "/folder_watch_test1", Dir.tmpdir + "/folder_watch_test2"]
