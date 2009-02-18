@@ -1,26 +1,38 @@
 osx_watchfolder
-    by FIXME (your name)
-    FIXME (url)
+    by Paul Wilson
+    http://merecomplexities.com	
 
 == DESCRIPTION:
 
-FIXME (describe your package)
+osx_watchfolder is a tiny gem to take advantages of OSX 10.5's folder watching functionality. 
 
 == FEATURES/PROBLEMS:
 
-* FIXME (list of features or problems)
+osx\_watchfolder  enables you to point a script at a directory, or group of directories, and be notified of changes.  Example usages are _autotest_-like scripts.
+
+Due to limitations with Ruby threading and Ruby-Cocoa, folders may only be watched from the main Ruby thread.
+
+Only works on OSX 10.5+ (Leopard), obviously.
+
 
 == SYNOPSIS:
 
-  FIXME (code sample of usage)
+To run a the method _run\_tests_ when a change is detected in a couple of folders:
+
+<pre><code>
+  OsxWatchFolder::FolderWatcher.new ("lib", "test") { run_tests}
+</pre></code>
 
 == REQUIREMENTS:
 
-* FIXME (list of requirements)
+* Only works on OSX 10.5+ (Leopard)
 
 == INSTALL:
 
-* FIXME (sudo gem install, anything else)
+<pre><code>
+  sudo gem install osx_watchfolder
+</pre></code>
+
 
 == LICENSE:
 
