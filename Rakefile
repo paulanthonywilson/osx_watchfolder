@@ -16,7 +16,7 @@ end
 ensure_in_path 'lib'
 require 'osx_watchfolder'
 
-task :default => 'spec:run'
+task :default => 'test:run'
 
 PROJ.name = 'osx_watchfolder'
 PROJ.authors = 'Paul Wilson'
