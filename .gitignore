@@ -9,3 +9,5 @@ build
 *.tm_build_errors
 *.pch
 .built
+doc
+pkg
