@@ -3,7 +3,7 @@ OSX.require_framework '/System/Library/Frameworks/CoreServices.framework/Framewo
 
 module OsxWatchfolder
 
-  # To run a the method 'run_tests' when a change is detected in a couple of folders:
+  # To run the method 'run_tests' when a change is detected in a couple of folders:
   #
   #  folder_watcher = OsxWatchfolder::FolderWatcher.new("lib", "test") { run_tests}
   #  folder_wacher.start

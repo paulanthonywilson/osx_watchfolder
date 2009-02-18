@@ -17,7 +17,7 @@ Only works on OSX 10.5+ (Leopard), obviously.
 
 == SYNOPSIS:
 
-To run a the method 'run_tests' when a change is detected in a couple of folders:
+To run a method 'run_tests' when a change is detected in a couple of folders:
 
   OsxWatchfolder::FolderWatcher.new("lib", "test") { run_tests}.start
 
