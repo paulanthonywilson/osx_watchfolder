@@ -27,7 +27,7 @@ To run a method 'run_tests' when a change is detected in a couple of folders:
 
 == INSTALL:
 
-  sudo gem install osx_watchfolder
+  sudo gem install paulanthonywilson-osx_watchfolder
 
 
 == LICENSE:
