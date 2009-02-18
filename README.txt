@@ -17,11 +17,9 @@ Only works on OSX 10.5+ (Leopard), obviously.
 
 == SYNOPSIS:
 
-To run a the method _run\_tests_ when a change is detected in a couple of folders:
+To run a the method 'run_tests' when a change is detected in a couple of folders:
 
-<pre><code>
   OsxWatchFolder::FolderWatcher.new ("lib", "test") { run_tests}
-</pre></code>
 
 == REQUIREMENTS:
 
@@ -29,9 +27,7 @@ To run a the method _run\_tests_ when a change is detected in a couple of folder
 
 == INSTALL:
 
-<pre><code>
   sudo gem install osx_watchfolder
-</pre></code>
 
 
 == LICENSE:
