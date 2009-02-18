@@ -24,5 +24,7 @@ PROJ.email = 'paul.wilson@merecomplexities.com'
 PROJ.url = 'http://github.com/paulanthonywilson/osx_watchfolder'
 PROJ.version = OsxWatchfolder::VERSION
 PROJ.exclude << '\.gitignore'
+PROJ.notes.exclude = %w(^README\.txt$ ^data/)
+PROJ.readme_file = 'README.rdoc'
 
 # EOF
