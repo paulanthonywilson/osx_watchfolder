@@ -1,6 +1,6 @@
 osx_watchfolder
     by Paul Wilson
-    http://merecomplexities.com	
+    http://merecomplexities.com 
 
 == DESCRIPTION:
 
@@ -19,6 +19,8 @@ Only works on OSX 10.5+ (Leopard), obviously.
 
 To run a method 'run_tests' when a change is detected in a couple of folders:
 
+  require 'rubygems'
+  require 'osx_watchfolder'
   OsxWatchfolder::FolderWatcher.new("lib", "test") { run_tests}.start
 
 == REQUIREMENTS:
