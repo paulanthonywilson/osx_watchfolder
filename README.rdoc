@@ -29,14 +29,17 @@ To run a method 'run_tests' when a change is detected in a couple of folders:
 
 == INSTALL:
 
-  sudo gem install paulanthonywilson-osx_watchfolder
+  sudo gem install osx_watchfolder
 
+or
+
+  gem install osx_watchfolder
 
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2009 FIXME (different license?)
+Copyright (c) 2009 
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
